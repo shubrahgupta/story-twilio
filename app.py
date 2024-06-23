@@ -11,9 +11,10 @@ auth_token = 'TWILIO_TOKEN'
 from_twilio_number = 'TWILIO_PHONE_NO'
 
 prompts = {
-    "/story":"""Generate a short and entertaining story of maximum 1500 letters count for the genre and the age group provided the by user.
+    "/story":"""Generate a short and entertaining story of maximum 1200 characters count ONLY for the genre and the age group provided by user.
     Don't generate story for sexual or lewd genre""",
 }
+
 
 def openai_handler(user_response, category):
     parser = StrOutputParser()
@@ -43,7 +44,7 @@ def make_call(story, from_number):
     call = client.calls.create(
         to=from_number,
         from_=from_twilio_number,
-        twiml=f'<Response><Say>Hi, This your Story Teller Bot, {story}</Say></Response>'
+        twiml=f'<Response><Say voice="Google.en-IN-Standard-D">Hi, This your Story Teller Bot, {story}</Say></Response>'
     )
 
 def msg_handler(incoming_msg, from_number):
